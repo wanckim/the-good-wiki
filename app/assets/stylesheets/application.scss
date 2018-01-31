@@ -16,3 +16,8 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+.nav li p {
+  margin-top: 11px;
+  padding: 0 10px;
+}
