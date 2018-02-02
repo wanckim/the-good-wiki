@@ -3,7 +3,7 @@ class Wiki < ApplicationRecord
 
   default_scope { order('created_at DESC') }
 
-  validates :title, length:{ minimum: 5 }, presence: true
-  validates :body, length:{ minimum: 15 }, presence: true
+  validates :title, length:{ minimum: 3 }, presence: true
+  validates :body, length:{ minimum: 8 }, presence: true
   validates :user, presence: true
 end
