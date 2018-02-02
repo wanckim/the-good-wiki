@@ -17,11 +17,13 @@
   </div>
 
   <div class="col-md-4">
-    <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
-    <br />
-    <br />
-    <small>
-      *<span class='glyphicon glyphicon-lock' id="private"></span> = Private
-    </small>
+    <% if current_user %>
+      <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
+      <br />
+      <br />
+      <small>
+        *<span class='glyphicon glyphicon-lock' id="private"></span> = Private
+      </small>
+    <% end %>
   </div>
 </div>
