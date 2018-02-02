@@ -1,1 +1,27 @@
-<h1>The Good Wiki</h1>
+<div class="jumbotron">
+  <h1>Welcome to <strong>The Good Wiki</strong></h1>
+  <p>The Good Wiki is a resource for sharing links with your friends!</p>
+  <% if current_user %>
+    <% if current_user.role == "standard" %>
+    <br />
+      <p><%= link_to "Upgrade to Premium", new_charge_path, class: 'btn btn-primary' %> today! and enjoy all the benefits.</p>
+    <% elsif current_user.role == "premium" %>
+      <p>Enjoy your <span id="premium">Premium</span> membership <strong><%= "#{current_user.email}" %>!</strong></p>
+    <% end %>
+  <% else %>
+    <p><%= link_to "Sign In", new_user_session_path %> or
+    <p><%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-success' %> today!</p>
+  <% end %>
+</div>
+
+<% if current_user %>
+  <% if current_user.role == "standard" %>
+    <%= render partial: 'standard' %>
+  <% elsif current_user.role == "premium" %>
+    <%= render partial: 'premium' %>
+  <% elsif current_user.role == "admin" %>
+    <%= render partial: 'admin' %>
+  <% end %>
+<% else %>
+  <%= render 'guest' %>
+<% end %>

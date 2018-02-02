@@ -1,0 +1,14 @@
+<%= form_tag charges_path do %>
+  <h2>Upgrade to Premium Membership</h2>
+  <ul>
+    <li>Upgrade NOW and get all the benefits today.</li>
+    <li>Your age must be over 21 to upgrade your membership.</li>
+    <li>Every payment credentials are encrypted for your safety.</li>
+  </ul>
+  <p>If you agree the terms and agreements, please click the button below to Upgrade.</p>
+
+  <script class='stripe-button' src="https://checkout.stripe.com/checkout.js"
+          data-key="<%= @stripe_btn_data[:key] %>"
+          data-amount="<%= @stripe_btn_data[:amount] %>"
+          data-description="<%= @stripe_btn_data[:description] %>" ></script>
+<% end %>
