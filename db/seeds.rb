@@ -7,11 +7,11 @@ User.create!(
   role: "admin"
 )
 
-User.create!(
-  email: Faker::Internet.unique.email,
-  password: Faker::Lorem.characters(10),
-  role: "standard"
-)
+# User.create!(
+#   email: Faker::Internet.unique.email,
+#   password: Faker::Lorem.characters(10),
+#   role: "standard"
+# )
 
 User.create!(
   email: "user@bloccit.com",
@@ -19,14 +19,20 @@ User.create!(
   role: "premium"
 )
 
+User.create!(
+  email: "new_user@bloccit.com",
+  password: "password",
+  role: "premium"
+)
+
 users = User.all
 
 # Create Wikis
-10.times do
+50.times do
   Wiki.create!(
     title: Faker::HarryPotter.character,
     body: Faker::HarryPotter.quote,
-    private: Faker::Boolean.boolean,
-    user: users.last
+    private: true,
+    user: users.sample
   )
 end

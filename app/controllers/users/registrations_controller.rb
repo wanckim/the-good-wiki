@@ -28,6 +28,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.where(id: current_user.id)
     @user.update(role: "standard")
 
+    wikis = Wiki.where(user_id: current_user.id)
+    wikis.each do |wiki|
+      wiki.update(private: false)
+    end
+
     flash[:notice] = "You have canceled your Premium membership successfully."
     redirect_to root_path
   end
