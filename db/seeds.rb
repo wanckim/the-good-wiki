@@ -13,6 +13,12 @@ User.create!(
   role: "standard"
 )
 
+User.create!(
+  email: "user@bloccit.com",
+  password: "password",
+  role: "premium"
+)
+
 users = User.all
 
 # Create Wikis
