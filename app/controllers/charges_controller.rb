@@ -1,11 +1,11 @@
 class ChargesController < ApplicationController
-  after_action :upgrade_premium, only: :create
+  include AmountModule
 
   def new
     @stripe_btn_data = {
       key: "#{Rails.configuration.stripe[:publishable_key]}",
       description: "BigMoneyMembership - #{current_user.email}",
-      amount: Amount.default
+      amount: default
     }
   end
 
@@ -19,11 +19,12 @@ class ChargesController < ApplicationController
     # Where the real magic happens
     charge = Stripe::Charge.create(
       customer: customer.id,
-      amount: Amount.default,
+      amount: default,
       description: "BigMoneyMembership - #{current_user.email}",
       currency: 'usd'
     )
 
+    current_user.update(role: 'premium')
     flash[:notice] = "Thank you for the payment #{current_user.email}! You have purchased the Premium Membership."
     redirect_to root_path
 
@@ -32,13 +33,5 @@ class ChargesController < ApplicationController
     rescue Stripe::CardError => e
       flash[:alert] = e.message
       redirect_to new_charge_path
-  end
-
-  private
-
-  def upgrade_premium
-    user = User.find(current_user.id)
-    user.update_attributes(role: "premium")
-    user.save
   end
 end

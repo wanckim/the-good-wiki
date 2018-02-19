@@ -2,10 +2,10 @@
   <h1>Welcome to <strong>The Good Wiki</strong></h1>
   <p>The Good Wiki is a resource for sharing links with your friends!</p>
   <% if current_user %>
-    <% if current_user.role == "standard" %>
+    <% if current_user.standard? %>
     <br />
       <p><%= link_to "Upgrade to Premium", new_charge_path, class: 'btn btn-primary' %> today! and enjoy all the benefits.</p>
-    <% elsif current_user.role == "premium" %>
+    <% elsif current_user.premium? %>
       <p>Enjoy your <span id="premium">Premium</span> membership <strong><%= "#{current_user.email}" %>!</strong></p>
       <i>* If you want to stop using Premium services, please click the button to cancel your Premium membership.</i>
       <%= link_to "Cancel Premium membership", downgrade_path, class: 'btn btn-default btn-sm' %>
@@ -17,11 +17,11 @@
 </div>
 
 <% if current_user %>
-  <% if current_user.role == "standard" %>
+  <% if current_user.standard? %>
     <%= render partial: 'standard' %>
-  <% elsif current_user.role == "premium" %>
+  <% elsif current_user.premium? %>
     <%= render partial: 'premium' %>
-  <% elsif current_user.role == "admin" %>
+  <% elsif current_user.admin? %>
     <%= render partial: 'admin' %>
   <% end %>
 <% else %>

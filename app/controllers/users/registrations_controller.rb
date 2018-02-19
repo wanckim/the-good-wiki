@@ -25,8 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def downgrade
-    @user = User.where(id: current_user.id)
-    @user.update(role: "standard")
+    current_user.update(role: "standard")
 
     wikis = Wiki.where(user_id: current_user.id)
     wikis.each do |wiki|
