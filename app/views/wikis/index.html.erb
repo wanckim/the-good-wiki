@@ -10,6 +10,7 @@
             <% if is_private?(wiki) %>
               <span class='glyphicon glyphicon-lock' id="private"></span>
             <% end %>
+            <p><%= markdown(wiki.body) %></p>            
           </div>
         </div>
       </div>
