@@ -3,7 +3,7 @@
     <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Remove Collaborator <%="#{user.email}"%>
   <% end %>
 <% else %>
-  <%= link_to [wiki, Collaborator.new], class: 'btn btn-primary', method: :post do %>
+  <%= link_to [wiki, wiki.collaborators.new(:user_id => user.id)], class: 'btn btn-primary', method: :post do %>
     <i class="glyphicon glyphicon-star"> </i>&nbsp; Add Collaborator <%="#{user.email}"%>
   <% end %>
 <% end %>

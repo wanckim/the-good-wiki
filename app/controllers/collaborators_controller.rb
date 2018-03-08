@@ -1,9 +1,9 @@
 class CollaboratorsController < ApplicationController
-  before_action :require_sign_in
+  # before_action :require_sign_in
 
-  def create(user)
+  def create
     wiki = Wiki.find(params[:wiki_id])
-    collaborator = wiki.collaborators.build(user: user)
+    collaborator = wiki.collaborators.build(params[:user_id])
 
     if collaborator.save
       flash[:notice] = "Added collaborator."
@@ -14,7 +14,7 @@ class CollaboratorsController < ApplicationController
     redirect_to [wiki]
   end
 
-  def destroy(user)
+  def destroy
     wiki = Wiki.find(params[:wiki_id])
     collaborator = wiki.collaborators.find(params[:id])
 
