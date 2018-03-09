@@ -1,5 +1,8 @@
 class User < ApplicationRecord
-  has_many :wikis
+  # has_many :wikis
+
+  has_many :collaborators
+  has_many :wikis, through: :collaborators
 
   after_initialize :assign_role
 
@@ -13,4 +16,5 @@ class User < ApplicationRecord
   end
 
   enum role: [:admin, :premium, :standard, :guest]
+  
 end

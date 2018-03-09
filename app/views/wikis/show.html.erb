@@ -15,8 +15,10 @@
   <div class="col-md-4">
     <%= link_to "Edit", edit_wiki_path(@wiki), class: "btn btn-success" %>
     <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this post?' } %>
+    <br />
+    <br />
     <% all_users.each do |user| %>
-      <% if user != current_user %>
+      <% unless user == current_user || user.admin? %>
         <%= render partial: 'collaborators/collaborator', locals: {wiki: @wiki, user: user} %>
       <% end %>
     <% end %>

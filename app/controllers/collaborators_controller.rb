@@ -1,9 +1,9 @@
 class CollaboratorsController < ApplicationController
-  # before_action :require_sign_in
+  before_action :authorize_user
 
   def create
     wiki = Wiki.find(params[:wiki_id])
-    collaborator = wiki.collaborators.build(params[:user_id])
+    collaborator = wiki.collaborators.build(:user_id => params[:user_id])
 
     if collaborator.save
       flash[:notice] = "Added collaborator."
@@ -25,4 +25,15 @@ class CollaboratorsController < ApplicationController
     end
       redirect_to [wiki]
   end
+
+  private
+
+  def authorize_user
+    wiki = Wiki.find(params[:wiki_id])
+    unless current_user == wiki.user || current_user.admin?
+      flash[:alert] = "Only the owner of the wiki can assign collaborators."
+      redirect_to [wiki]
+    end
+  end
+
 end

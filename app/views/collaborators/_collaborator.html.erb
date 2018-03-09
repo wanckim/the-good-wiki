@@ -1,9 +1,9 @@
 <% if collaborator = wiki.collaborated(user) %>
-  <%= link_to [wiki, collaborator], class: 'btn btn-danger', method: :delete do %>
-    <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Remove Collaborator <%="#{user.email}"%>
+  <%= link_to [wiki, user, collaborator], class: 'btn btn-danger', method: :delete do %>
+    <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Remove <u><%="#{user.email}"%></u> from Collaborator
   <% end %>
 <% else %>
-  <%= link_to [wiki, wiki.collaborators.new(:user_id => user.id)], class: 'btn btn-primary', method: :post do %>
-    <i class="glyphicon glyphicon-star"> </i>&nbsp; Add Collaborator <%="#{user.email}"%>
+  <%= link_to [wiki, user, wiki.collaborators.new], class: 'btn btn-primary', method: :post do %>
+    <i class="glyphicon glyphicon-star"> </i>&nbsp; Add <u><%="#{user.email}"%></u> to Collaborator
   <% end %>
 <% end %>
