@@ -18,7 +18,7 @@
     <br />
     <br />
     <% all_users.each do |user| %>
-      <% unless user == current_user || user.admin? %>
+      <% unless user == current_user || user.admin? || !(current_user.admin? || current_user.premium?) %>
         <%= render partial: 'collaborators/collaborator', locals: {wiki: @wiki, user: user} %>
       <% end %>
     <% end %>
